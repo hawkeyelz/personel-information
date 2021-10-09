@@ -1,0 +1,83 @@
+/* .input-form {
+    border: solid 1px black;
+    border-radius: 3px;
+    padding: 1rem;
+    margin: 1rem;
+    width: fit-content;
+    background-color:whitesmoke;
+    box-shadow: yellow;
+
+} */
+
+form div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.25rem;
+    font-weight: bold;
+
+    
+}
+
+.input-fields {
+    flex-wrap: nowrap;
+    outline: none;
+    color: black;
+    border: unset;
+    border-bottom: 2px solid black;
+    font-size: 1rem;
+    text-align: left;
+    padding: .5rem;
+    margin: 1rem;
+}
+
+.input-fields:focus {
+    outline: none;
+    color: blue;
+    border-bottom: 2px solid darkblue;
+}
+
+/* form div input {
+    flex-wrap: nowrap;
+    background-color: white;
+    color: black;
+    padding: .75rem;
+    margin: 1.25rem;
+    font-size: 1.25rem;
+    text-align: left;
+} */
+
+/* form div input:focus {
+    border-style: solid;
+    border-color: royalblue;
+} */
+
+form div label{
+    font-weight: bold;
+    text-align: left;
+    font-size: 1.25rem;
+    margin-right: 10px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 20px 5px;
+    justify-content: center;
+}
+.formError {
+    border: solid, 2px, red;
+    background-color: rgb(255, 176, 176);
+}
+
+.indicate-error {
+    display: inline;
+    color: red;
+    font-size: 1.25rem;
+}
+
+.indicator {
+    display: none;
+}
