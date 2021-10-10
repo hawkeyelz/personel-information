@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./inputForm.css";
+import { Form, Button, Alert, InputGroup, Dropdown, Container, Row, Col } from "react-bootstrap";
 const InputForm = (props) => {
   //States
   const [person, setPerson] = useState({
@@ -91,6 +92,8 @@ const InputForm = (props) => {
     });
   };
 
+  const handlePaymentTypeChange = (event) => {};
+
   const handleBirthDateChange = (event) => {
     new Date(event.target.value) instanceof Date
       ? setValidation((previousState) => {
@@ -104,11 +107,85 @@ const InputForm = (props) => {
     });
   };
 
+  const handleReportsToChange = (event) => {};
+
+  const handleDepartmentChange = (event) => {};
+
   return (
-    <div className={"form-container"}>
+    <Container>
+      <Row>
       <h2>Enter New Personal's Information</h2>
-      <form className={"input-form"} onSubmit={handleSubmit}>
-        <div>
+      <Form className={"input-form"} onSubmit={handleSubmit}>
+        {/* <Form.Group className="mb-3"> */}
+          <Row xs={1} md={3} className="mb-2">
+          <Col>
+          <Form.Label>Name</Form.Label>
+          </Col>
+          <Col>
+          <Form.Control placeholder="First Name" />
+          </Col>
+          <Col>
+          <Form.Control placeholder="Last Name" />
+          </Col>
+          </Row>
+        {/* </Form.Group> */}
+        {/* <Form.Group className="mb-1"> */}
+        <Row>
+    
+          <Form.Group>
+          <Form.Label>Salary</Form.Label>
+          <InputGroup.Text>$</InputGroup.Text>
+          <Form.Control
+            type="number"
+            placeholder="Salary"
+            min="0.00"
+            max="999999999.999"
+            style={{marginRight: '1rem'}}
+          />
+          </Form.Group>
+          </Row>
+          <Row xs={2} md={3}>
+            <Col>
+          <Form.Label>Payrate</Form.Label>
+          </Col>
+          <Col>
+          <Form.Group>
+          <Form.Label>Hourly</Form.Label>
+          <Form.Check type="radio" name="payrate"></Form.Check>
+          <Form.Label>Salary</Form.Label>
+          <Form.Check type="radio" name="payrate"></Form.Check>
+          </Form.Group>
+          <div></div>
+          </Col>
+          </Row>
+          <hr/>
+
+      
+        {/* </Form.Group> */}
+        <Form.Group>
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="department">
+              Department
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/">Department</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
+          <Dropdown>
+            <Dropdown.Toggle variant="primary" id="reportsto">
+              Reports To
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item>Reports To</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Start Date</Form.Label>
+          <Form.Control type="date" placeholder="dd-mm-yyy" min={new Date()} />
+        </Form.Group>
+        {/* <div>
           <label>First:</label>
           <input
             className={`input-fields`}
@@ -166,10 +243,14 @@ const InputForm = (props) => {
           <label>Hourly</label>
           <input className={`input-fields`} name="fav_language" type="radio" />
         </div>
-        <button type="submit">Add</button>
-      </form>
-      <button onClick={handleCancel}>Cancel</button>
-    </div>
+        <button type="submit">Add</button> */}
+      <Form.Group className="border  rounded rounded-right p-1">
+      <Button variant="success" onClick={()=>{}}>Save</Button>
+      <Button variant="dark" onClick={handleCancel}>Cancel</Button>
+      </Form.Group>
+      </Form>
+      </Row>
+    </Container>
   );
 };
 
