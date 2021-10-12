@@ -1,8 +1,14 @@
 import { useState } from "react";
 import styles from "./inputForm.css";
-import { Form, Button, Alert, InputGroup, Dropdown, Container, Row, Col } from "react-bootstrap";
+
+import { Form, Button, Dropdown, Container, Row, Col } from "react-bootstrap";
+
+import CurrencyInput from "./CurrencyInput/CurrencyInput";
+import PayType from "../PayType/paytype";
+import PhoneNumberInput from "./PhoneNumberInput/PhoneNumberInput";
 const InputForm = (props) => {
   //States
+  const [isEdit, setIsEdit] = useState(false);
   const [person, setPerson] = useState({
     id: 0,
     name: "",
@@ -52,7 +58,7 @@ const InputForm = (props) => {
     console.log("NOTHING TO DO");
   };
 
-  const handleNameChange = (event) => {
+  const handleFirstNameChange = (event) => {
     event.target.value.length > 0
       ? setValidation((previousState) => {
           return { ...previousState, name: true };
@@ -62,7 +68,7 @@ const InputForm = (props) => {
         });
 
     setPerson((previousState) => {
-      return { ...previousState, name: event.target.value };
+      return { ...previousState, first: event.target.value };
     });
   };
 
@@ -107,148 +113,119 @@ const InputForm = (props) => {
     });
   };
 
+  const handlePhoneNumberChange = (event) => {};
+
+  const handleEmailChange = (event) => {};
+
   const handleReportsToChange = (event) => {};
 
   const handleDepartmentChange = (event) => {};
 
+  const handlePayTypeChange = (value) => {
+    console.log(value);
+    setIsEdit(!isEdit);
+  };
+
+  const handleStartingPayRateChange = (value) => {};
+
+  const handleCurrentPayRateChange = (value) => {};
   return (
     <Container>
-      <Row>
-      <h2>Enter New Personal's Information</h2>
-      <Form className={"input-form"} onSubmit={handleSubmit}>
-        {/* <Form.Group className="mb-3"> */}
+      <Row className="mb-2">
+        <h2>Enter New Personal's Information</h2>
+        <Form className={"input-form"} onSubmit={handleSubmit}>
           <Row xs={1} md={3} className="mb-2">
-          <Col>
-          <Form.Label>Name</Form.Label>
-          </Col>
-          <Col>
-          <Form.Control placeholder="First Name" />
-          </Col>
-          <Col>
-          <Form.Control placeholder="Last Name" />
-          </Col>
-          </Row>
-        {/* </Form.Group> */}
-        {/* <Form.Group className="mb-1"> */}
-        <Row>
-    
-          <Form.Group>
-          <Form.Label>Salary</Form.Label>
-          <InputGroup.Text>$</InputGroup.Text>
-          <Form.Control
-            type="number"
-            placeholder="Salary"
-            min="0.00"
-            max="999999999.999"
-            style={{marginRight: '1rem'}}
-          />
-          </Form.Group>
-          </Row>
-          <Row xs={2} md={3}>
             <Col>
-          <Form.Label>Payrate</Form.Label>
-          </Col>
-          <Col>
-          <Form.Group>
-          <Form.Label>Hourly</Form.Label>
-          <Form.Check type="radio" name="payrate"></Form.Check>
-          <Form.Label>Salary</Form.Label>
-          <Form.Check type="radio" name="payrate"></Form.Check>
-          </Form.Group>
-          <div></div>
-          </Col>
+              <Form.Label>Name</Form.Label>
+            </Col>
+            <Col>
+              <Form.Control
+                placeholder="First Name"
+                onChange={handleFirstNameChange}
+              />
+            </Col>
+            <Col>
+              <Form.Control
+                placeholder="Last Name"
+                onChange={handleLastNameChange}
+              />
+            </Col>
           </Row>
-          <hr/>
+          <Row>
+            <Col>
+              <Form.Label>Email Address</Form.Label>
+              <Form.Control type="email" placeholder="Enter Email" />
+            </Col>
+            <Col>
+              <PhoneNumberInput/>
+            </Col>
+          </Row>
+          <hr />
+          <Row>
+            <Form.Label>Pay</Form.Label>
+            <Col md={6}>
+              {isEdit && (
+                <CurrencyInput
+                  placeholder="Current Rate"
+                  onChange={handleCurrentPayRateChange}
+                />
+              )}
+              {!isEdit && (
+                <CurrencyInput
+                  placeholder="Starting Pay Rate"
+                  onChange={handleStartingPayRateChange}
+                />
+              )}
+            </Col>
+            <Col md={2}>
+              <PayType onChange={handlePayTypeChange} />
+            </Col>
+            <Col md={1}></Col>
+          </Row>
+          <hr />
 
-      
-        {/* </Form.Group> */}
-        <Form.Group>
-          <Dropdown>
-            <Dropdown.Toggle variant="success" id="department">
-              Department
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item href="#/">Department</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+          <Row>
+            <Col md={3} className="mb-2">
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="department">
+                  Department
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item href="#/">Department</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Col>
 
-          <Dropdown>
-            <Dropdown.Toggle variant="primary" id="reportsto">
-              Reports To
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item>Reports To</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Start Date</Form.Label>
-          <Form.Control type="date" placeholder="dd-mm-yyy" min={new Date()} />
-        </Form.Group>
-        {/* <div>
-          <label>First:</label>
-          <input
-            className={`input-fields`}
-            typeof="text"
-            maxLength="255"
-            onChange={handleNameChange}
-            value={person.name}
-          />
-          <label>Last: </label>
-          <input
-            className={`input-fields`}
-            typeof="text"
-            maxLength="255"
-            onChange={handleLastNameChange}
-            value={person.last}
-          />
-        </div>
-        <div>
-          <label>Birthday</label>
-          <input
-            className={"input-fields"}
-            type="date"
-            onChange={handleBirthDateChange}
-            />
-        </div>
-        <div>
-          <label>Reports To</label>
-          <select className="input-fields" typeof="text" maxLength="255">
-            <option> </option>
-            <option>Mike Richards</option>
-            <option>Jhon Stevens</option>
-            <option>Dave Hamelton</option>
-          </select>
-          <label>Department</label>
-          <select className="input-fields">
-            className='input-fields'
-            <option>Widgit Manufacturing</option>
-            <option>Inspection</option>
-            <option>Shipping</option>
-            <option>Maintenance</option>
-          </select>
-          <label>Salary: </label>
-          $
-          <input
-            className={`input-fields`}
-            type="number"
-            onChange={handleSalaryChange}
-            value={person.salary}
-            min="200"
-            max="10000000"
-            step="0.01"
-          />
-          <label>Salary</label>
-          <input className={`input-fields`} name="fav_language" type="radio" />
-          <label>Hourly</label>
-          <input className={`input-fields`} name="fav_language" type="radio" />
-        </div>
-        <button type="submit">Add</button> */}
-      <Form.Group className="border  rounded rounded-right p-1">
-      <Button variant="success" onClick={()=>{}}>Save</Button>
-      <Button variant="dark" onClick={handleCancel}>Cancel</Button>
-      </Form.Group>
-      </Form>
+            <Col md={3}>
+              <Dropdown>
+                <Dropdown.Toggle variant="primary">Reports To</Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item>Reports To</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Col>
+
+            <Col className="pull-right">
+              <Form.Group>
+                <Form.Label>Start Date</Form.Label>
+                <Form.Control
+                  type="date"
+                  placeholder="dd-mm-yyy"
+                  min={new Date()}
+                />
+              </Form.Group>
+            </Col>
+            <Col md={3}></Col>
+          </Row>
+          <Form.Group className="border  rounded rounded-right p-1">
+            <Button variant="success" onClick={() => {}}>
+              Save
+            </Button>
+            <Button variant="dark" onClick={handleCancel}>
+              Cancel
+            </Button>
+          </Form.Group>
+        </Form>
       </Row>
     </Container>
   );

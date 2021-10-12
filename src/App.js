@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
-import { Alert, Button } from "react-bootstrap";
 import InputForm from "./components/InputForm/InputForm";
 import AddButton from "./components/InputForm/AddButton";
 
@@ -34,10 +33,6 @@ function App() {
       </header>
       <InputForm showForm={showForm} onCancel={toggleForm} addPerson={addPerson} />
       {!showForm && <AddButton onCLick={handleAddNewClick} />}
-      <Alert>
-    This is a alert—check it out!
-  </Alert>
-      <Button>I'M A DAMN BUTTON</Button>
       {personal.map((per, idx)=> (<div key={idx}>{per.id} - {per.name}</div>))}
     </div>
   );
