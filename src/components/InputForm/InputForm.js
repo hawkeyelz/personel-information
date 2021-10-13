@@ -132,7 +132,7 @@ const InputForm = (props) => {
   return (
     <Container>
       <Row className="mb-2">
-        <h2>Enter New Personal's Information</h2>
+        <h2>{isEdit? `Edit ${person.name} 's Information` : "Add A New Employee"}</h2>
         <Form className={"input-form"} onSubmit={handleSubmit}>
           <Row xs={1} md={3} className="mb-2">
             <Col>
@@ -152,11 +152,13 @@ const InputForm = (props) => {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col lg="2">
               <Form.Label>Email Address</Form.Label>
+            </Col>
+            <Col lg="4">
               <Form.Control type="email" placeholder="Enter Email" />
             </Col>
-            <Col>
+            <Col lg="4">
               <PhoneNumberInput/>
             </Col>
           </Row>
@@ -219,7 +221,7 @@ const InputForm = (props) => {
           </Row>
           <Form.Group className="border  rounded rounded-right p-1">
             <Button variant="success" onClick={() => {}}>
-              Save
+            {!isEdit? "Add" : "Save"}
             </Button>
             <Button variant="dark" onClick={handleCancel}>
               Cancel
