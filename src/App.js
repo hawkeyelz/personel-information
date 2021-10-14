@@ -1,7 +1,10 @@
 import { useState } from "react";
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
 import InputForm from "./components/InputForm/InputForm";
 import AddButton from "./components/InputForm/AddButton";
+
+
 
 function App() {
   const [personal, setPersonal] = useState([{name: 'bob'}]);
